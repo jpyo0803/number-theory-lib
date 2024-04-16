@@ -1,5 +1,4 @@
 import build.ntl as ntl
-import numpy as np
 import unittest
 import random
 
