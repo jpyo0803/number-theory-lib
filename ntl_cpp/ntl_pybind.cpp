@@ -28,6 +28,13 @@ void bind_gcd(py::module_& m, const std::string& typestr) {
           ("Gcd(x, y) for type " + typestr).c_str());
 }
 
+template<typename T>
+void bind_is_prime(py::module_& m, const std::string& typestr) {
+    m.def(("IsPrime_" + typestr).c_str(), &jpyo0803::IsPrime<T>,
+          py::arg("x"),
+          ("IsPrime(x) for type " + typestr).c_str());
+}
+
 PYBIND11_MODULE(ntl, m) {
     m.doc() = "Pybind11 wrapper for the number theory library";
 
@@ -44,6 +51,9 @@ PYBIND11_MODULE(ntl, m) {
 
     bind_gcd<uint32_t>(m, "uint32");
     bind_gcd<uint64_t>(m, "uint64");
+
+    bind_is_prime<uint32_t>(m, "uint32");
+    bind_is_prime<uint64_t>(m, "uint64");
 
     // If needed, add other types here such as float, double, etc.
 }

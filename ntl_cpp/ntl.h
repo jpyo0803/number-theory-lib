@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <iostream> 
+#include <cmath>
 
 using namespace std;
 
@@ -39,6 +40,18 @@ template <typename T>
 T Gcd(T x, T y) {
   if (y == 0) return x;
   return Gcd(y, x % y);
+}
+
+template <typename T>
+T IsPrime(T x) {
+  if (x <= 1) return false;
+
+  for (T i = 2; i <= static_cast<T>(sqrt(x)); ++i) {
+    if (x % i == 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 }
