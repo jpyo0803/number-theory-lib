@@ -21,6 +21,13 @@ void bind_repeated_sqr(py::module_& m, const std::string& typestr) {
           ("Compute base^exp for type " + typestr).c_str());
 }
 
+template<typename T>
+void bind_gcd(py::module_& m, const std::string& typestr) {
+    m.def(("Gcd_" + typestr).c_str(), &jpyo0803::Gcd<T>,
+          py::arg("x"), py::arg("y"),
+          ("Gcd(x, y) for type " + typestr).c_str());
+}
+
 PYBIND11_MODULE(ntl, m) {
     m.doc() = "Pybind11 wrapper for the number theory library";
 
@@ -34,6 +41,9 @@ PYBIND11_MODULE(ntl, m) {
     bind_repeated_sqr<uint32_t>(m, "uint32");
     bind_repeated_sqr<int64_t>(m, "int64");
     bind_repeated_sqr<uint64_t>(m, "uint64");
+
+    bind_gcd<uint32_t>(m, "uint32");
+    bind_gcd<uint64_t>(m, "uint64");
 
     // If needed, add other types here such as float, double, etc.
 }

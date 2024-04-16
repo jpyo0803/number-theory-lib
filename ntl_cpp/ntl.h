@@ -35,6 +35,12 @@ T RepeatedSqr(T base, T exp) {
   return res;
 }
 
+template <typename T>
+T Gcd(T x, T y) {
+  if (y == 0) return x;
+  return Gcd(y, x % y);
+}
+
 }
 
 #endif 
