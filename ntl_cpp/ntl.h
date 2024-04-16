@@ -9,32 +9,29 @@ using namespace std;
 namespace jpyo0803 {
 
 template <typename T>
-T RepeatedSqr(T base, T exp, T mod = 0) {
+T RepeatedSqrMod(T base, T exp, T mod) {
   if (exp == 0) {
     return 1;
   }
 
-  T res = RepeatedSqr(base, exp / 2, mod);
+  T res = RepeatedSqrMod(base, exp / 2, mod);
   res *= res;
+  res %= mod;
 
-  if (mod != 0) res %= mod;
   if (exp % 2) res *= base;
-  if (mod != 0) res %= mod;
-  return res;
+  return res % mod;
 }
 
-uint64_t RepeatedSqrTest(uint64_t base, uint64_t exp, uint64_t mod = 0) {
+template <typename T>
+T RepeatedSqr(T base, T exp) {
   if (exp == 0) {
     return 1;
   }
 
-
-  uint64_t res = RepeatedSqrTest(base, exp / 2, mod);
+  T res = RepeatedSqr(base, exp / 2);
   res *= res;
 
-  if (mod != 0) res %= mod;
   if (exp % 2) res *= base;
-  if (mod != 0) res %= mod;
   return res;
 }
 
