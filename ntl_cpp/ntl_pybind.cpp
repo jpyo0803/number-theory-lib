@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include "ntl.h"  // Update this to the actual location of your ntl.h file
 #include <iostream>
-
 using namespace std;
 
 namespace py = pybind11;
@@ -55,5 +55,6 @@ PYBIND11_MODULE(ntl, m) {
     bind_is_prime<uint32_t>(m, "uint32");
     bind_is_prime<uint64_t>(m, "uint64");
 
+    m.def("eratosthenes_sieve", &jpyo0803::EratosthenesSieve, "A function that calculates all prime numbers up to a given number using the Sieve of Eratosthenes algorithm");
     // If needed, add other types here such as float, double, etc.
 }
