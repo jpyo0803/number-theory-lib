@@ -11,11 +11,6 @@ using namespace std;
 
 namespace jpyo0803 {
 
-// NOTE(jpyo0803): Use Fermat's little theorem
-// This algorithm only works when p is prime
-// and k is not a multiple of p. That is gcd(k, p) == 1
-// uint64_t FindKeyInvMod(uint64_t k, uint64_t p);
-
 std::vector<uint64_t> EratosthenesSieve(uint64_t n);
 
 template <typename T>

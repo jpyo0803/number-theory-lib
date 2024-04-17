@@ -2,19 +2,6 @@
 
 namespace jpyo0803 {
   
-// uint64_t FindKeyInvMod(uint64_t k, uint64_t p) {
-//   bool is_prime = IsPrime<uint64_t>(p);
-
-//   uint64_t res;
-//   if (is_prime) {
-//     res = RepeatedSqrMod<uint64_t>(k, p - 2, p);
-//   } else {
-//     // res = 
-//   }
-
-//   return 0;
-// }
-
 std::vector<uint64_t> EratosthenesSieve(uint64_t n) {
   assert(n >= 2); // 'n' needs to be at least 2 
 
