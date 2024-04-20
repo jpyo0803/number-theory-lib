@@ -24,7 +24,6 @@ def Factorize(n: int):
 def FindKeyInvMod(key: int, mod: int):
     assert key >= 1  # key is always larger or equal to 1
     assert mod >= 1
-    assert key < mod  # key must be smaller than mod
 
     if ntl_cpp.IsPrime_uint64(mod):
         # if mod is prime, apply Fermat's Little Theorem
