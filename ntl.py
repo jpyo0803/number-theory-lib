@@ -21,22 +21,32 @@ def Factorize(n: int):
     return factors
 
 
-def FindKeyInvMod(key: int, mod: int):
+def FindKeyInvModPrime(key: int, mod: int):
     assert key >= 1  # key is always larger or equal to 1
     assert mod >= 1
 
-    if ntl_cpp.IsPrime_uint64(mod):
-        # if mod is prime, apply Fermat's Little Theorem
-        return ntl_cpp.RepeatedSqrMod_uint64(key, mod - 2, mod)
-    else:
-        # call this directly to avoid copy overhead
+    # if mod is prime, apply Fermat's Little Theorem
+    return ntl_cpp.RepeatedSqrMod_uint64(key, mod - 2, mod)
+
+
+factors = None
+phi = None
+
+
+# Fastest
+def FindKeyInvModNonPrime(key: int, mod: int):
+    assert key >= 1  # key is always larger or equal to 1
+    assert mod >= 1
+    global factors
+    global phi  # compute phi only once
+    if factors is None:
         factors = primefactors(mod)
         phi = mod
         for factor in factors:
             phi //= factor
         for factor in factors:
             phi *= (factor - 1)
-        return ntl_cpp.RepeatedSqrMod_uint64(key, phi - 1, mod)
+    return ntl_cpp.RepeatedSqrMod_uint64(key, phi - 1, mod)
 
 
 if __name__ == '__main__':

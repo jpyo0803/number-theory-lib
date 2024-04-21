@@ -6,10 +6,13 @@
 #include <cmath>
 #include <vector>
 #include <cassert>
+#include <random>
 
 using namespace std;
 
 namespace jpyo0803 {
+
+
 
 std::vector<uint64_t> EratosthenesSieve(uint64_t n);
 
@@ -58,6 +61,31 @@ T IsPrime(T x) {
   return true;
 }
 
+template <typename T>
+T GenerateRandomCoprimeLessthanN(T n) {
+  assert(n >= 1);
+
+  static std::random_device rd;  // Non-deterministic random device
+  static std::mt19937 rng(rd()); // Random-number engine used (Mersenne-Twister in this case)
+  std::uniform_int_distribution<T> uni(1, n - 1);
+
+  while (true) {
+    T x = uni(rng);
+    if (Gcd<T>(x, n) == 1) {
+      return x;
+    }
+  }
+}
+
+uint64_t FindKeyInvModPrime(uint64_t key, uint64_t mod);
+
+uint64_t FindKeyInvModNonPrime(uint64_t key, uint64_t mod, const std::vector<uint32_t>& factors);
+
+std::vector<uint64_t> GenerateKeySetA(uint64_t mod, int n);
+
+std::vector<uint64_t> GenerateKeySetB(uint64_t mod, int n);
+
+// std::vector<std::vector<uint32_t>> FindKeyInvModNonPrimeArray2D(const std::vector<uint32_t>& key_set_a1, const std::vector<uint32_t>& key_set_a2, uint64_t mod, const std::vector<uint32_t>& factors);
 }
 
 #endif 

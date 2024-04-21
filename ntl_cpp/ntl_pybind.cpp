@@ -57,4 +57,33 @@ PYBIND11_MODULE(ntl, m) {
 
     m.def("eratosthenes_sieve", &jpyo0803::EratosthenesSieve, "A function that calculates all prime numbers up to a given number using the Sieve of Eratosthenes algorithm");
     // If needed, add other types here such as float, double, etc.
+
+    m.def("FindKeyInvModPrime", &jpyo0803::FindKeyInvModPrime,
+          "Finds the modular inverse of a key under a prime modulus using repeated squaring method.",
+          py::arg("key"), py::arg("mod"));
+
+    m.def("FindKeyInvModNonPrime", &jpyo0803::FindKeyInvModNonPrime,
+          "Calculate the modular inverse of a key under a non-prime modulus using the Euler's totient function.",
+          py::arg("key"), py::arg("mod"), py::arg("factors"));
+
+    m.def("GenerateRandomCoprimeLessthanN_uint32",
+          &jpyo0803::GenerateRandomCoprimeLessthanN<uint32_t>,
+          "Generate a random coprime number less than n (uint32_t version).",
+          py::arg("n"));
+
+    m.def("GenerateRandomCoprimeLessthanN_uint64",
+          &jpyo0803::GenerateRandomCoprimeLessthanN<uint64_t>,
+          "Generate a random coprime number less than n (uint64_t version).",
+          py::arg("n"));
+
+    m.def("GenerateKeySetA", &jpyo0803::GenerateKeySetA,
+          "Generates a set of random uint64_t keys within the range [1, mod-1].",
+          py::arg("mod"), py::arg("n"));
+    m.def("GenerateKeySetB", &jpyo0803::GenerateKeySetB,
+          "Generates a set of random uint64_t keys within the range [1, mod-1].",
+          py::arg("mod"), py::arg("n"));
+
+    // m.def("FindKeyInvModNonPrimeArray2D", &jpyo0803::FindKeyInvModNonPrimeArray2D,
+    //       "Function to find the modular inverses of products of key pairs from two sets, under a non-prime modulus.",
+    //       py::arg("key_set_a1"), py::arg("key_set_a2"), py::arg("mod"), py::arg("factors"));
 }
