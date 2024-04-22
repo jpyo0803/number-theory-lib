@@ -29,6 +29,14 @@ void bind_gcd(py::module_& m, const std::string& typestr) {
 }
 
 template<typename T>
+void bind_std_gcd(py::module_& m, const std::string& typestr) {
+    m.def(("StdGcd_" + typestr).c_str(), &jpyo0803::Gcd<T>,
+          py::arg("x"), py::arg("y"),
+          ("StdGcd(x, y) for type " + typestr).c_str());
+}
+
+
+template<typename T>
 void bind_is_prime(py::module_& m, const std::string& typestr) {
     m.def(("IsPrime_" + typestr).c_str(), &jpyo0803::IsPrime<T>,
           py::arg("x"),
@@ -51,6 +59,9 @@ PYBIND11_MODULE(ntl, m) {
 
     bind_gcd<uint32_t>(m, "uint32");
     bind_gcd<uint64_t>(m, "uint64");
+    
+    bind_std_gcd<uint32_t>(m, "uint32");
+    bind_std_gcd<uint64_t>(m, "uint64");
 
     bind_is_prime<uint32_t>(m, "uint32");
     bind_is_prime<uint64_t>(m, "uint64");
@@ -76,12 +87,6 @@ PYBIND11_MODULE(ntl, m) {
           "Generate a random coprime number less than n (uint64_t version).",
           py::arg("n"));
 
-    m.def("GenerateKeySetA", &jpyo0803::GenerateKeySetA,
-          "Generates a set of random uint64_t keys within the range [1, mod-1].",
-          py::arg("mod"), py::arg("n"));
-    m.def("GenerateKeySetB", &jpyo0803::GenerateKeySetB,
-          "Generates a set of random uint64_t keys within the range [1, mod-1].",
-          py::arg("mod"), py::arg("n"));
 
     // m.def("FindKeyInvModNonPrimeArray2D", &jpyo0803::FindKeyInvModNonPrimeArray2D,
     //       "Function to find the modular inverses of products of key pairs from two sets, under a non-prime modulus.",

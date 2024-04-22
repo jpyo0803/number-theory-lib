@@ -7,6 +7,7 @@
 #include <vector>
 #include <cassert>
 #include <random>
+#include <numeric>
 
 using namespace std;
 
@@ -50,6 +51,12 @@ T Gcd(T x, T y) {
 }
 
 template <typename T>
+T StdGcd(T x, T y) {
+  return std::gcd(x, y);
+}
+
+
+template <typename T>
 T IsPrime(T x) {
   if (x <= 1) return false;
 
@@ -81,11 +88,6 @@ uint64_t FindKeyInvModPrime(uint64_t key, uint64_t mod);
 
 uint64_t FindKeyInvModNonPrime(uint64_t key, uint64_t mod, const std::vector<uint32_t>& factors);
 
-std::vector<uint64_t> GenerateKeySetA(uint64_t mod, int n);
-
-std::vector<uint64_t> GenerateKeySetB(uint64_t mod, int n);
-
-// std::vector<std::vector<uint32_t>> FindKeyInvModNonPrimeArray2D(const std::vector<uint32_t>& key_set_a1, const std::vector<uint32_t>& key_set_a2, uint64_t mod, const std::vector<uint32_t>& factors);
 }
 
 #endif 
